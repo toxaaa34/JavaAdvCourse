@@ -25,11 +25,12 @@ public class Main {
         figures.add(new Rectangle(6,6));
         figures.add(new Rectangle(7,3));
         figures.add(new Rectangle(3,7));
+        figures.add(new Rectangle(2,6));
 
         List<Rectangle> uniqueFigures = figures.stream().distinct().toList();
-        System.out.println(uniqueFigures.stream().count());
+        System.out.println("Кол-во уникальных фигур: " + uniqueFigures.stream().count());
 
-        System.out.println(uniqueFigures.stream().mapToInt(Rectangle::getArea).sum());
+        System.out.println("Сумма площади уникальных фигур: " + uniqueFigures.stream().mapToInt(Rectangle::getArea).sum());
 
         // второе задание
 
@@ -66,21 +67,18 @@ public class Main {
                 ))
         );
 
-        // Вывод списка названий планет по убыванию массы
-        System.out.println("Планеты по убыванию массы:");
+        System.out.println("\nПланеты по убыванию массы:");
         planets.stream()
                 .sorted(Comparator.comparingDouble(Planet::getMass).reversed())
                 .map(Planet::getName)
                 .forEach(System.out::println);
 
-        // Вывод списка названий планет по возрастанию суммарной массы спутников
         System.out.println("\nПланеты по возрастанию суммарной массы спутников:");
         planets.stream()
                 .sorted(Comparator.comparingDouble(p -> p.getSatellites().stream().mapToDouble(Satellite::getMass).sum()))
                 .map(Planet::getName)
                 .forEach(System.out::println);
 
-        // Вывод списка названий всех спутников по возрастанию массы
         System.out.println("\nВсе спутники по возрастанию массы:");
         planets.stream()
                 .flatMap(p -> p.getSatellites().stream())
